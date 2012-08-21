@@ -4,11 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -17,7 +14,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,8 +39,6 @@ public class MainActivity extends Activity implements onTaskCompletion{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        EncodeDecodeURL();
-        
         mCompletion = this;
 
         textView = (TextView) findViewById(R.id.textView);
@@ -56,27 +50,6 @@ public class MainActivity extends Activity implements onTaskCompletion{
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
-    }
-    
-    private void EncodeDecodeURL() {
-    	try {  
-    		  String url = "http://www.yoursite.com/blah";
-    		  String queryString = "param=1&value=2";  
-    		 
-    		  // Encode
-    		  String encodedQueryString = URLEncoder.encode(queryString,"UTF-8");
-    		  String encodedUrl = url + "?" + encodedQueryString;
-    		  Log.d("Encode URL: ", encodedUrl);
-    		   
-    		   // Decode 
-    		   String decodeUrl = URLDecoder.decode(encodedUrl, "UTF-8");
-    		   Log.d("Decode URL: ", decodeUrl);
-    		 }
-    		 catch (UnsupportedEncodingException e)
-    		 {
-    		  Log.e("Exception: " , e.getMessage());
-    		 
-    		 }
     }
     
     BroadcastReceiver mReceiver = new BroadcastReceiver() {
